@@ -33,14 +33,22 @@ def enddate(dateclose):
 #debug argument and default variables
 args = sys.argv
 try:
-	if args[3] == "--debug":
+	if args[5] == "--debug":
 		debug = True
 except:
 	debug = False
 
+try:
+	ref_ROI = float(args[3])
+except:
+	ref_ROI = 0.15				#return of investment - shows how successful bookmaker ("tipster") is
+
+try:
+	ref_noA = int(args[4])
+except:
+	ref_noA = 45				#number of analyzes - shows how many analyzes tipster made so far
+
 ref_moneyin = 1000			#value to bet
-ref_ROI = 0.15				#return of investment - shows how successful bookmaker ("tipster") is
-ref_noA = 45				#number of analyzes - shows how many analyzes tipster made so far
 ref_days = 21				#reffers to how many days forward can script bet
 user_limiter = 50			# if debug, only this amount of tipsters will be checked 
 
