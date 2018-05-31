@@ -35,6 +35,7 @@ args = sys.argv
 try:
 	if args[5] == "--debug":
 		debug = True
+	else: debug = False
 except:
 	debug = False
 
