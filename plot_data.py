@@ -18,11 +18,6 @@ if ("show_all" in args) or ("--show_all" in args):
 else:
 	arg_all = False
 
-if ("inv_only" in args) or ("--inv_only" in args):
-	arg_inv = True
-else:
-	arg_inv = False
-
 if ("date" in args) or ("--date" in args):
 	date = True
 else:
@@ -32,11 +27,11 @@ def load_obj(name, folder):
 	with open(folder + '/' + name + '.pkl', 'rb') as f:
 		return pickle.load(f)
 
-invest_curr = load_obj("investment","variables")
+
 #print invest_curr
 inv = 0
 while True:
-
+	invest_curr = load_obj("investment","variables")
 	search_dir = "variables/txt_invs/" 
 	files = filter(os.path.isfile, glob.glob(search_dir + "*"))
 	files.sort(key=lambda x: os.path.getmtime(x))
@@ -52,8 +47,8 @@ while True:
 		noL = (len(os.listdir('variables/finished_L')))
 		noINV = (len(os.listdir('variables/found_tickets')))
 		real_balance = (invest_curr + int(noINV)*1000) - 30000
-		print "Vsazeno: " + str(noINV) + "    Ziskových: " + str(noW) + "    Ztrátových: " + str(noL) + "    Čistý Z: " + str(real_balance)
-	if date:
+		print "Invested tickets: " + str(noINV) + "    Profitable: " + str(noW) + "    Lossy: " + str(noL) + "    Net profit: " + str(real_balance)
+	if date or arg_all:
 		date_list = []
 		for ticket in os.listdir('variables/found_tickets'):
 			ticket_data = load_obj(ticket[:-4],'variables/found_tickets')
